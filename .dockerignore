@@ -1,0 +1,7 @@
+node_modules
+database.db
+test-database.db
+backups
+.git
+.env
+*.pem
