@@ -45,7 +45,7 @@ router.get("/categoria/:categoriaId", (req, res) => {
 // POST /api/productos/backup -> respalda el archivo database.db
 router.post("/backup", (req, res) => {
   try {
-    const backupsDir = path.join(__dirname, "..", "backups");
+    const backupsDir = path.join(__dirname, "..", "..", "backups");
 
     if (!fs.existsSync(backupsDir)) {
       fs.mkdirSync(backupsDir, { recursive: true });

@@ -5,7 +5,7 @@ const Database = require("better-sqlite3");
 module.exports = async () => {
   process.env.NODE_ENV = "test";
 
-  const { DB_PATH, createTables } = require("../dbConfig");
+  const { DB_PATH, createTables } = require("../src/dbConfig");
 
   if (fs.existsSync(DB_PATH)) {
     fs.unlinkSync(DB_PATH);

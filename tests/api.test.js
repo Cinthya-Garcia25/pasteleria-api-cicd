@@ -4,7 +4,7 @@ process.env.NODE_ENV = "test";
 const fs = require("fs");
 const path = require("path");
 const request = require("supertest");
-const app = require("../app");
+const app = require("../src/app");
 
 const CATEGORIA_PASTELES_ID = 1;
 const PRODUCTO_CHOCOLATE_ID = 1;

@@ -3,6 +3,7 @@ const path = require("path");
 // con NODE_ENV=test se usa un archivo aparte para no tocar la base de desarrollo
 const DB_PATH = path.join(
   __dirname,
+  "..",
   process.env.NODE_ENV === "test" ? "test-database.db" : "database.db"
 );
 

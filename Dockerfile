@@ -15,4 +15,4 @@ ENV PORT=80
 EXPOSE 80
 EXPOSE 6061
 
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]
