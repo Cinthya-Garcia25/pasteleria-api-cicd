@@ -11,6 +11,19 @@ const PRODUCTO_CHOCOLATE_ID = 1;
 const PRODUCTO_GALLETAS_ID = 2;
 const ID_INEXISTENTE = 99999;
 
+describe("GET /api/health", () => {
+  it("debe responder 200 con el estado de la API", async () => {
+    const res = await request(app).get("/api/health");
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      statusCode: 200,
+      status: "ok",
+      mensaje: "API de pastelería funcionando correctamente",
+    });
+  });
+});
+
 describe("GET /api/categorias", () => {
   it("debe responder 200 con el arreglo de categorias", async () => {
     const res = await request(app).get("/api/categorias");
