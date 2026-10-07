@@ -1,8 +1,8 @@
 **Categorías**
 
-1. `GET http://<HOST>:8080/api/categorias`
+1. `GET http://3.16.159.47/api/categorias`
 
-2. `POST http://<HOST>:8080/api/categorias`
+2. `POST http://3.16.159.47/api/categorias`
 Body:
 ```json
 {
@@ -11,17 +11,17 @@ Body:
 }
 ```
 
-3. `DELETE http://<HOST>:8080/api/categorias/6`
+3. `DELETE http://3.16.159.47/api/categorias/6`
 
 **Productos**
 
-4. `GET http://<HOST>:8080/api/productos`
+4. `GET http://3.16.159.47/api/productos`
 
-5. `GET http://<HOST>:8080/api/productos/categoria/4`
+5. `GET http://3.16.159.47/api/productos/categoria/4`
 
-6. `GET http://<HOST>:8080/api/productos/6`
+6. `GET http://3.16.159.47/api/productos/6`
 
-7. `POST http://<HOST>:8080/api/productos`
+7. `POST http://3.16.159.47/api/productos`
 Body:
 ```json
 {
@@ -33,7 +33,7 @@ Body:
 }
 ```
 
-8. `PUT http://<HOST>:8080/api/productos/6`
+8. `PUT http://3.16.159.47/api/productos/6`
 Body (todos los campos son opcionales; solo se actualizan los que se envían):
 ```json
 {
@@ -45,11 +45,11 @@ Body (todos los campos son opcionales; solo se actualizan los que se envían):
 ```
 Respuestas: `200` con el producto actualizado, `404` si el producto o la categoría no existen, `400` si el body no trae ningún campo para actualizar.
 
-9. `DELETE http://<HOST>:8080/api/productos/7`
+9. `DELETE http://3.16.159.47/api/productos/7`
 
-10. `POST http://<HOST>:8080/api/productos/backup`
+10. `POST http://3.16.159.47/api/productos/backup`
 
-11. `DELETE http://<HOST>:8080/api/productos/vaciar`
+11. `DELETE http://3.16.159.47/api/productos/vaciar`
 
 **Recuperar la base de datos (si se elimina o se vacía)**
 
@@ -70,7 +70,7 @@ docker restart webapp-container
 ```
 5. Verificar que los datos volvieron:
 ```bash
-curl http://localhost:8080/api/categorias
+curl http://localhost/api/categorias
 ```
 
 **Pruebas automatizadas**
