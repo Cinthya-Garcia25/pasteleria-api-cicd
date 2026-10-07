@@ -86,6 +86,9 @@ describe("GET /api/productos", () => {
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body.data)).toBe(true);
     expect(res.body.data.length).toBeGreaterThanOrEqual(2);
+    res.body.data.forEach((producto) => {
+      expect(producto.disponible).toBe(producto.stock > 0);
+    });
   });
 });
 
@@ -121,7 +124,21 @@ describe("GET /api/productos/:id", () => {
       id: PRODUCTO_CHOCOLATE_ID,
       nombre: "Pastel de chocolate",
       precio: 350,
+      stock: 10,
     });
+    expect(res.body.data).toHaveProperty("disponible");
+    expect(res.body.data.disponible).toBe(true);
+  });
+
+  it("debe marcar disponible en false si el stock es 0", async () => {
+    const creado = await request(app)
+      .post("/api/productos")
+      .send({ nombre: "Producto agotado", precio: 20, stock: 0 });
+
+    const res = await request(app).get(`/api/productos/${creado.body.data.id}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body.data.disponible).toBe(false);
   });
 
   it("debe responder 404 si el producto no existe", async () => {

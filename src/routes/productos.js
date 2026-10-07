@@ -7,11 +7,17 @@ const { apiResponse } = require("../utils/apiResponse");
 
 const router = express.Router();
 
+// agrega el campo calculado "disponible" (true si hay stock)
+const conDisponible = (producto) => ({
+  ...producto,
+  disponible: producto.stock > 0,
+});
+
 // GET /api/productos -> lista todos los productos
 router.get("/", (req, res) => {
   try {
     const productos = db.prepare("SELECT * FROM productos").all();
-    res.status(200).json(apiResponse(200, productos));
+    res.status(200).json(apiResponse(200, productos.map(conDisponible)));
   } catch (error) {
     res.status(500).json(apiResponse(500, { message: error.message }));
   }
@@ -101,7 +107,7 @@ router.get("/:id", (req, res) => {
         .json(apiResponse(404, { message: "Producto no encontrado" }));
     }
 
-    res.status(200).json(apiResponse(200, producto));
+    res.status(200).json(apiResponse(200, conDisponible(producto)));
   } catch (error) {
     res.status(500).json(apiResponse(500, { message: error.message }));
   }
