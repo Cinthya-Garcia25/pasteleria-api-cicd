@@ -54,3 +54,23 @@ jobs:
           tags: |
             cinthya25/pasteleria-api:latest
             cinthya25/pasteleria-api:${{ github.sha }}
+
+  deploy:
+    name: Desplegar en AWS EC2
+    needs: build-and-push
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Desplegar por SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+            docker pull cinthya25/pasteleria-api:latest
+            docker stop webapp-container || true
+            docker rm webapp-container || true
+            docker run -d -p 80:80 -p 6061:6061 --name webapp-container --restart unless-stopped cinthya25/pasteleria-api:latest
