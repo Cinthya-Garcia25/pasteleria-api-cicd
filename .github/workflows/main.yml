@@ -26,3 +26,31 @@ jobs:
 
       - name: Correr pruebas con cobertura
         run: npx jest --coverage --coverageReporters=text --coverageReporters=text-summary
+
+  build-and-push:
+    name: Construir y publicar imagen Docker
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Login a Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build y push de la imagen
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: |
+            cinthya25/pasteleria-api:latest
+            cinthya25/pasteleria-api:${{ github.sha }}
