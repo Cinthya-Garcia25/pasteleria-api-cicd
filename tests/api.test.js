@@ -19,7 +19,7 @@ describe("GET /api/health", () => {
     expect(res.body).toEqual({
       statusCode: 200,
       status: "ok",
-      mensaje: "API de pastelería funcionando correctamente",
+      mensaje: "API correctamente",
     });
   });
 });
