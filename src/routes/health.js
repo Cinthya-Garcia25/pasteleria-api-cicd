@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   res.status(200).json({
     ...apiResponse(200),
     status: "ok",
-    mensaje: "API de pastelería funcionando correctamente",
+    mensaje: "API correctamente",
   });
 });
 
